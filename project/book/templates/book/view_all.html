@@ -1,0 +1,16 @@
+{% extends 'book/base.html' %}
+
+
+{% block content %}
+<a href={% url 'create_book' %}><button type="button">Add New Book</button></a>
+{%for b in book%}
+    <div>
+    <h2><a href="{% url 'book_details' pk=b.pk %}">{{b.title}}</h2></a>
+        <p>{{b.img|linebreaksbr}}</p>
+        <p>{{b.desc|linebreaksbr}}</p>
+        <p>State : {{b.state|linebreaksbr}}</p>
+        <p>BY : {{b.author|linebreaksbr}}</p>
+        <p>Created date : {{b.created_date|linebreaksbr}}</p>
+    </div>
+    {% endfor %}
+{% endblock %}
