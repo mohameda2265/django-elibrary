@@ -21,5 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('book.urls',namespace='book')),
-    path('authors/',include('author.urls',namespace='author'))
+    path('authors/',include('author.urls',namespace='author')),
+    path('api/books/',include('book.api.urls',namespace='books-api')),
+
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
