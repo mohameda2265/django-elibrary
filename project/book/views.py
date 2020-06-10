@@ -2,16 +2,20 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.utils import timezone
 from .models import Book
 from .forms import BookForm
+from .filters import BookFilter
 from django.http import HttpResponse
 
 def view_all(request):
     book = Book.objects.all()
-    return render(request, 'book/view_all.html', {"book":book})
+    myFilter = BookFilter(request.GET,queryset=book)
+    book = myFilter.qs
+    context = {"book":book,"myFilter":myFilter}
+    return render(request, 'book/view_all.html', context)
 
 
 def create_book(request):
     if request.method == "POST":
-        form = BookForm(request.POST)
+        form = BookForm(request.POST or None , request.FILES or None)
         if form.is_valid:
             book = form.save(commit=False)
             book = form.save()
@@ -23,7 +27,7 @@ def create_book(request):
 def edit_book(request,pk):
     book = get_object_or_404(Book,pk=pk)
     if request.method == "POST":
-        form = BookForm(request.POST,instance=book)
+        form = BookForm(request.POST, request.FILES or None, instance=book)
         if form.is_valid:
             book = form.save(commit=False)
             book = form.save()
@@ -40,3 +44,6 @@ def delete_book(request,pk):
     book = get_object_or_404(Book,pk=pk)
     book.delete()
     return redirect('view_all')
+
+def admin(request):
+    return redirect('admin')

@@ -11,7 +11,7 @@ class Book(models.Model):
     author = models.ForeignKey(Author,on_delete=models.CASCADE,related_name="author_book")
     title = models.CharField(max_length=50)
     desc = models.TextField(default='')
-    img = models.ImageField(upload_to='book_image/',default='book_image/default.png')
+    img = models.FileField(upload_to='images',default='/images/default.png')
     state_choices = [
         (Published,'Published'),
         (Withdrawn,'Withdrawn'),
@@ -26,3 +26,5 @@ class Book(models.Model):
     
     def __str__(self):
         return self.title
+
+    

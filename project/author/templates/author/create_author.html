@@ -1,0 +1,36 @@
+{% extends 'author/base.html' %}
+{% url 'author' %}
+
+
+{% block content %}
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+<a class="navbar-brand" href="#">Library App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'book:view_all' %}">Books <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'author:view_all' %}">Authors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'book:admin' %}">Admin Panal</a>
+      </li>
+    </ul>
+  </div>
+    </nav>
+
+    <h2>New Author</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        <p>Name : {{ form.name }}</p>
+        <p >E-Mail : {{ form.mail }}</p>
+        <button type="submit" class="btn btn-info">Save</button>
+    </form>
+
+{% endblock %}

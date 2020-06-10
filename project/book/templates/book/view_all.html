@@ -1,16 +1,50 @@
 {% extends 'book/base.html' %}
-
+{% load static %}
 
 {% block content %}
-<a href={% url 'create_book' %}><button type="button">Add New Book</button></a>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+<a class="navbar-brand" href="#">Library App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'book:view_all' %}">Books <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'author:view_all' %}">Authors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'book:admin' %}">Admin Panal</a>
+      </li>
+    </ul>
+  </div>
+    </nav>
+
+
+
+<a href={% url 'book:create_book' %}><button type="button" class="btn btn-success btn-lg btn-block">Add New Book</button></a>
+<form method="get">
+				{{myFilter.form}}
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+<div class="row">
 {%for b in book%}
-    <div>
-    <h2><a href="{% url 'book_details' pk=b.pk %}">{{b.title}}</h2></a>
-        <p>{{b.img|linebreaksbr}}</p>
-        <p>{{b.desc|linebreaksbr}}</p>
-        <p>State : {{b.state|linebreaksbr}}</p>
-        <p>BY : {{b.author|linebreaksbr}}</p>
-        <p>Created date : {{b.created_date|linebreaksbr}}</p>
+<div class="col-4 mt-4">
+    <div class="card" style="width: 200px,height:100px;">
+        <img class="image-responsive" src="{{ b.img.url }}" alt="Card image cap">
+        <div class="card-body">
+    <h5 class="card-title">{{b.title}}</a></h5>
+        <p class="card-text">{{b.desc|linebreaksbr}}</p>
+        <p class="card-text">BY : {{b.author|linebreaksbr}}</p>
+        <p class="card-text"><small class="text-muted">State : {{b.state|linebreaksbr}}</small></p>
+        <p class="card-text">Created date : {{b.created_date|linebreaksbr}}</p>
+        <a href="{% url 'book:book_details' pk=b.pk %}" class="btn btn-primary">Book Details</a>
+        </div>
+        </div>
     </div>
     {% endfor %}
+    </div>
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'author/base.html' %}
+{% load static %}
+
+{% block content %}
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+<a class="navbar-brand" href="#">Library App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'book:view_all' %}">Books <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'author:view_all' %}">Authors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'book:admin' %}">Admin Panal</a>
+      </li>
+    </ul>
+  </div>
+    </nav>
+<a href={% url 'author:create_author' %}><button type="button" class="btn btn-success btn-lg btn-block">Add New Author</button></a>
+<form method="get">
+				{{myFilter.form}}
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+{%for a in author%}
+    <div>
+    <h2><a href="{% url 'author:author_details' pk=a.pk %}">{{a.name}}</h2></a>
+        <p> Email : {{a.mail}}
+    </div>
+    {% endfor %}
+{% endblock %}
