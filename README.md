@@ -9,6 +9,7 @@
     + drafted.
 ### Technologies used :
 + Python ( Django ).
++ Angular.
 + BootStrap.
 + Postgresql.
 + REST APIs.
