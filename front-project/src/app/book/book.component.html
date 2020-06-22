@@ -1,0 +1,28 @@
+<p>this table is coming from <code>api</code></p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Title</th>
+    <th scope="col">author</th>
+    <th scope="col">desc</th>
+    <th scope="col">state</th>
+    <th scope="col">created_date</th>
+    <th scope="col">image</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr  *ngFor="let book of books">
+    <td>
+    {{ book.id }}
+    </td>
+    <td>{{ book.title }}</td>
+    <td>{{ book.author }}</td>
+    <td>{{ book.desc }}</td>
+    <td>{{ book.state }}</td>
+    <td>{{ book.created_date }}</td>
+    <img width="300" alt="Company Logo" src="{{book.img}}"/>
+  </tr>
+  </tbody>
+</table>
